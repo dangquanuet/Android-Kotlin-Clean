@@ -1,4 +1,4 @@
-package com.quanda.moviedb.ui.utils
+package com.quanda.moviedb.utils
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable

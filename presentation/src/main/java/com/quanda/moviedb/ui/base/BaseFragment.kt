@@ -14,11 +14,9 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.quanda.moviedb.BR
 import com.quanda.moviedb.R
-import com.quanda.moviedb.ui.utils.DialogUtils
+import com.quanda.moviedb.utils.DialogUtils
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
-
-    abstract val bindingVariable: Int
 
     lateinit var viewBinding: ViewBinding
 

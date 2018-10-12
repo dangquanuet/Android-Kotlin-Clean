@@ -1,7 +1,6 @@
 package com.quanda.moviedb.ui.screen.main
 
 import android.os.Bundle
-import com.quanda.moviedb.BR
 import com.quanda.moviedb.R
 import com.quanda.moviedb.databinding.FragmentMainBinding
 import com.quanda.moviedb.ui.base.BaseFragment
@@ -14,9 +13,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
         fun newInstance() = MainFragment()
     }
-
-    override val bindingVariable: Int
-        get() = BR.viewModel
 
     override val layoutId: Int
         get() = R.layout.fragment_main
