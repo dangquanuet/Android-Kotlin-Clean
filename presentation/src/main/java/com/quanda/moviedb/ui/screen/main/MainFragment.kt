@@ -23,8 +23,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override val viewModel by viewModel<MainViewModel>()
 
-    var currentPositionFragment = Tab.POPULAR.position
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewBinding.viewModel = viewModel
