@@ -7,6 +7,10 @@ dependencies {
     implementation deps.rx_android
     implementation deps.rxjava2
 
+    implementation deps.koin.core
+    implementation deps.koin.android
+    implementation deps.koin.viewmodel
+
     testImplementation deps.mockito.core
     testImplementation deps.junit
     testImplementation deps.mock_web_server

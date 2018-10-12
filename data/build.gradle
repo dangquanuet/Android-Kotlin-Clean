@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
 
+repositories {
+    mavenCentral()
+}
+
 android {
     compileSdkVersion build_versions.target_sdk
 
