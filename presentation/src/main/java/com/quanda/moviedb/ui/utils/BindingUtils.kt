@@ -55,11 +55,11 @@ fun ImageView.loadImage(imageName: String?) {
 }
 
 @BindingAdapter(
-        value = ["loadImage", "placeholder", "centerCrop", "fitCenter", "circleCrop", "cacheSource", "animation", "large"],
+        value = ["loadImage", "placeholder", "centerCrop", "fitCenter", "circleCrop", "cacheSource", "animation"],
         requireAll = false)
 fun ImageView.loadImage(url: String? = "", placeHolder: Drawable?,
                         centerCrop: Boolean = false, fitCenter: Boolean = false, circleCrop: Boolean = false,
-                        isCacheSource: Boolean = false, animation: Boolean = false, isLarge: Boolean = false) {
+                        isCacheSource: Boolean = false, animation: Boolean = false) {
     if (TextUtils.isEmpty(url)) {
         setImageDrawable(placeHolder)
         return

@@ -25,7 +25,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewBinding.viewModel = viewModel
+
     }
 
 }
