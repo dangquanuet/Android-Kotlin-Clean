@@ -1,0 +1,106 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        // NOTE: please UPDATE versionCode and versionCode in presentation/build.gradle too
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        develop {
+            matchingFallbacks = ['debug', 'release']
+        }
+
+        production {
+            matchingFallbacks = ['debug', 'release']
+        }
+    }
+
+    libraryVariants.all { variant ->
+        def BASE_URL = ""
+        def BASE_TRACK_URL = ""
+
+        if (variant.getName().contains("develop")) {
+            BASE_URL = ""
+            BASE_TRACK_URL = ""
+        } else if (variant.getName().contains("production")) {
+            BASE_URL = ""
+        }
+
+        variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
+        variant.buildConfigField "String", "BASE_TRACK_URL", "\"${BASE_TRACK_URL}\""
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation deps.kotlin.stdlib
+
+    implementation deps.modules.domain
+
+    implementation deps.rx_android
+    implementation deps.rxjava2
+
+    implementation deps.room.runtime
+    implementation deps.room.rxjava2
+    kapt deps.room.compiler
+
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.adapter
+    implementation deps.okhttp_logging_interceptor
+
+    implementation deps.koin.core
+    implementation deps.koin.android
+    implementation deps.koin.viewmodel
+
+    /**
+     * testing
+     */
+    testImplementation deps.junit
+    testImplementation deps.mock_web_server
+    testImplementation deps.kotlin.test
+    testImplementation deps.arch_core.testing
+
+    testImplementation deps.robolectric.all
+
+    testImplementation deps.mockito.core
+    androidTestImplementation(deps.espresso.core, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    })
+    androidTestImplementation(deps.espresso.contrib, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    })
+    androidTestImplementation(deps.arch_core.testing, {})
+    androidTestImplementation deps.mockito.core, { exclude group: 'net.bytebuddy' }
+}
