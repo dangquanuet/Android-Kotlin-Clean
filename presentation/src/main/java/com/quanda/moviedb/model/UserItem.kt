@@ -15,7 +15,7 @@ data class UserItem(
 
 
 class UserItemMapper : ItemMapper<User, UserItem> {
-    override fun mapToPresentation(model: User): UserItem = UserItem(
+    override fun mapToPresentation(model: User) = UserItem(
         id = model.id,
         name = model.name,
         username = model.username,

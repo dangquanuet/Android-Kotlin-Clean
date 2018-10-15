@@ -19,7 +19,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
 import com.quanda.moviedb.BuildConfig
 import com.quanda.moviedb.Constants
-import com.quanda.moviedb.GlideApp
 import java.io.File
 
 @BindingAdapter("onRefreshListener")
