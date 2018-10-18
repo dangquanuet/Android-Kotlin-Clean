@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.quanda.moviedb.ui.screen.MainActivityViewModel" />
+            type="com.sample.clean.ui.screen.MainActivityViewModel" />
     </data>
 
     <FrameLayout

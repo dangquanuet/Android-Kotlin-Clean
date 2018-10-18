@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.quanda.moviedb.model.UserItem" />
+            type="com.sample.clean.model.UserItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
