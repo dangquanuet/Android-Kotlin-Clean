@@ -1,39 +1,80 @@
-# MovieDB-Kotlin-Clean
-The Movie DB app using Kotlin
+Android Kotlin Clean Architecture & Components
+===========================================================
 
-API https://www.themoviedb.org/documentation/api
+### Structure
+![Structure](images/clean_architecture_reloaded_layers.png "The app is composed of 3 modules ")
 
-Kotlin: https://kotlinlang.org/docs/reference/
+### Configs Android Studio Setting or codestyles
+Copy "AndroidStudio" folde or "AndroidStudio/codestyles"
+On linux:
+`/home/username/.AndroidStudio*`
+or
+`/home/username/AndroidStudio*`
 
-Data binding: https://developer.android.com/topic/libraries/data-binding/
+On Windows:
+`C:\Users\JohnDoe\.AndroidStudio*`
+or
+`C:\Users\JohnDoe\AndroidStudio*`
 
-RxJava 2, RxAndroid: https://github.com/ReactiveX/RxJava
+On MacOS:
+`~/Library/Preferences/.AndroidStudio*`
+or
+`~/Library/Preferences/AndroidStudio*`
 
-Coroutines: https://kotlinlang.org/docs/reference/coroutines.html
+### Template supporter [Clean Architect Components template][template]
+Support generate files such as: Fragment, Navigator, ViewModel, layout, Local Unit Test
 
-Retrofit 2: https://github.com/square/retrofit
+#### Domain Layer
 
-Gson: https://github.com/google/gson
+#### Data Layer
 
-Glide: https://github.com/bumptech/glide
+#### Presentation Layer
 
-Koin: https://github.com/InsertKoinIO/koin
-
-Android X: https://developer.android.com/topic/libraries/support-library/androidx-overview
-
-Clean Architecture
+### Architecture
+#### MVVM
 
 
-===> Android Architecture Component
+#### Domain layer Tests
+##### UseCase Tests
 
-Lifecycle: https://developer.android.com/topic/libraries/architecture/lifecycle
+#### Data Layer Unit Tests
+##### Model Mapper Tests
 
-View Model: https://developer.android.com/topic/libraries/architecture/viewmodel
+##### Repository Tests
 
-Live data: https://developer.android.com/topic/libraries/architecture/livedata.html
+##### Webservice Tests
+The project uses [MockWebServer][mockwebserver] project to test REST api interactions.
 
-Room: https://developer.android.com/topic/libraries/architecture/room.html
+#### Presentation layer Tests
+##### ViewModel Tests
 
-Architecture: https://github.com/googlesamples/android-architecture-components
+##### Model Mapper Tests
 
-<===
+### Libraries
+* [Android Support Library][support-lib]
+* [Android Architecture Components][arch]
+* [Android Data Binding][data-binding]
+* [Koin][koin] for dependency injection
+* [Rx Android 2][rxandroid2] for reactive extensions for Android
+* [Rx Java 2][rxjava2] for reactive extensions for the JVM
+* [Retrofit][retrofit] for REST api communication
+* [Glide][glide] for image loading
+* [Timber][timber] for logging
+* [espresso][espresso] for UI tests
+* [mockito][mockito] for mocking in tests
+
+
+[mockwebserver]: https://github.com/square/okhttp/tree/master/mockwebserver
+[support-lib]: https://developer.android.com/topic/libraries/support-library/index.html
+[arch]: https://developer.android.com/arch
+[data-binding]: https://developer.android.com/topic/libraries/data-binding/index.html
+[espresso]: https://google.github.io/android-testing-support-library/docs/espresso/
+[koin]: https://github.com/InsertKoinIO/koin
+[rxandroid2]: https://github.com/ReactiveX/RxAndroid
+[rxjava2]: https://github.com/ReactiveX/RxJava
+[retrofit]: http://square.github.io/retrofit
+[glide]: https://github.com/bumptech/glide
+[timber]: https://github.com/JakeWharton/timber
+[mockito]: http://site.mockito.org
+[template]: https://github.com/bachhoan88/Clean-Architecture-Template
+
