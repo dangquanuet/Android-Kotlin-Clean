@@ -103,7 +103,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, fragment, TAG)?.apply {
                 commitTransaction(this, addToBackStack, transit)
-            }?.commit()
+            }
     }
 
     fun replaceChildFragment(

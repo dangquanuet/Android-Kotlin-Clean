@@ -40,18 +40,15 @@ android {
     }
 
     libraryVariants.all { variant ->
-        def BASE_URL = ""
-        def BASE_TRACK_URL = ""
+        def BASE_URL = "http://example.com/"
 
         if (variant.getName().contains("develop")) {
-            BASE_URL = ""
-            BASE_TRACK_URL = ""
+            BASE_URL = "http://example.com/"
         } else if (variant.getName().contains("production")) {
-            BASE_URL = ""
+            BASE_URL = "http://example.com/"
         }
 
         variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
-        variant.buildConfigField "String", "BASE_TRACK_URL", "\"${BASE_TRACK_URL}\""
     }
 
     testOptions {
