@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sample.clean.ui.screen.webview.WebViewViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/white"
+            android:elevation="@dimen/dp_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_back"
+            android:layout_width="?android:actionBarSize"
+            android:layout_height="?android:actionBarSize"
+            android:background="?android:selectableItemBackground"
+            android:elevation="@dimen/dp_4"
+            android:padding="@dimen/dp_12"
+            app:layout_constraintBottom_toBottomOf="@id/view_toolbar"
+            app:layout_constraintStart_toStartOf="@id/view_toolbar"
+            app:srcCompat="@drawable/ic_close_black"
+            tools:src="@drawable/ic_close_black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="@dimen/dp_4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@{ viewModel.title }"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/image_back"
+            app:layout_constraintEnd_toEndOf="@id/view_toolbar"
+            app:layout_constraintStart_toStartOf="@id/view_toolbar"
+            app:layout_constraintTop_toTopOf="@id/image_back"
+            app:layout_constraintWidth_percent="0.6"
+            tools:text="Title" />
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar"
+            app:loadUrl="@{ viewModel.url }" />
+
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{ viewModel.isLoading ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_toolbar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
