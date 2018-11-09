@@ -7,7 +7,7 @@ import com.sample.clean.domain.usecase.UseCase
 import io.reactivex.Single
 
 open class FindUserUseCase constructor(
-        private val userRepository: UserRepository
+    private val userRepository: UserRepository
 ) : UseCase<FindUserUseCase.Params?, Single<User>>() {
 
     override fun onCleared() {

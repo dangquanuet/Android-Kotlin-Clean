@@ -4,6 +4,7 @@ import com.sample.clean.data.BuildConfig
 import com.sample.clean.data.di.Properties.TIME_OUT
 import com.sample.clean.data.remote.api.UserApi
 import com.sample.clean.data.remote.factory.RxErrorHandlingCallAdapterFactory
+import com.sample.clean.data.remote.mock.MockUserApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-val networkModule = module(override = true) {
+val networkModule = module {
     single(name = "logging") { createLoggingInterceptor() }
     single(name = "header") { createHeaderInterceptor() }
     single { createOkHttpClient(get(name = "logging"), get(name = "header")) }
@@ -74,6 +75,7 @@ fun createAppRetrofit(okHttpClient: OkHttpClient): Retrofit {
 }
 
 fun createUserApi(retrofit: Retrofit): UserApi {
-    return retrofit.create(UserApi::class.java)
+    return if (BuildConfig.MOCK_DATA) MockUserApi()
+    else retrofit.create(UserApi::class.java)
 }
 

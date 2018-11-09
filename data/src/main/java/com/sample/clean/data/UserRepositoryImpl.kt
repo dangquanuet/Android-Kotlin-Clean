@@ -16,7 +16,7 @@ class UserRepositoryImpl constructor(
 ) : UserRepository {
 
     override fun getUser(id: String, fromServer: Boolean): Single<User> {
-        return Single.just(User(id))
+        return userApi.getUser(id).map { userMapper.mapToDomain(it) }
     }
 
 }

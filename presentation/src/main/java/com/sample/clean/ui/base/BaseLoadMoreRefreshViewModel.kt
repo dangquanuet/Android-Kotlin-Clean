@@ -3,6 +3,7 @@ package com.sample.clean.ui.base
 import androidx.lifecycle.MutableLiveData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sample.clean.Constants
+import com.sample.clean.domain.Constants.DEFAULT_ITEM_PER_PAGE
 import com.sample.clean.ui.widgets.EndlessRecyclerOnScrollListener
 
 abstract class BaseLoadMoreRefreshViewModel<Item>() : BaseViewModel() {
@@ -21,9 +22,10 @@ abstract class BaseLoadMoreRefreshViewModel<Item>() : BaseViewModel() {
     val onScrollListener = object : EndlessRecyclerOnScrollListener(getLoadMoreThreshold()) {
         override fun onLoadMore() {
             if (isLoading.value == true
-                    || isRefreshing.value == true
-                    || isLoadMore.value == true
-                    || isLastPage.value == true) return
+                || isRefreshing.value == true
+                || isLoadMore.value == true
+                || isLastPage.value == true
+            ) return
             isLoadMore.value = true
             loadMore()
         }
@@ -52,7 +54,7 @@ abstract class BaseLoadMoreRefreshViewModel<Item>() : BaseViewModel() {
 
     fun getLoadMoreThreshold() = Constants.DEFAULT_NUM_VISIBLE_THRESHOLD
 
-    fun getNumberItemPerPage() = Constants.DEFAULT_ITEM_PER_PAGE
+    fun getNumberItemPerPage() = DEFAULT_ITEM_PER_PAGE
 
     fun resetLoadMore() {
         onScrollListener.resetOnLoadMore()

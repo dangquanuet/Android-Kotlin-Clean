@@ -19,8 +19,15 @@ class RxErrorHandlingCallAdapterFactory : CallAdapter.Factory() {
 
     private val instance = RxJava2CallAdapterFactory.create()
 
-    override fun get(returnType: Type, annotations: Array<Annotation>, retrofit: Retrofit): CallAdapter<*, *>? {
-        return RxCallAdapterWrapper(retrofit, instance.get(returnType, annotations, retrofit) as CallAdapter<Any, Any>)
+    override fun get(
+        returnType: Type,
+        annotations: Array<Annotation>,
+        retrofit: Retrofit
+    ): CallAdapter<*, *>? {
+        return RxCallAdapterWrapper(
+            retrofit,
+            instance.get(returnType, annotations, retrofit) as CallAdapter<Any, Any>
+        )
     }
 }
 
@@ -63,7 +70,11 @@ class RxCallAdapterWrapper<R>(
             // We had non-200 http error
             is HttpException -> {
                 val response = throwable.response()
-                RetrofitException.httpError(response.raw().request().url().toString(), response, retrofit)
+                RetrofitException.httpError(
+                    response.raw().request().url().toString(),
+                    response,
+                    retrofit
+                )
             }
             // A network error happened
             is IOException -> {
@@ -89,7 +100,8 @@ class RxCallAdapterWrapper<R>(
                 }
                 try {
                     val errorResponse = response.errorBody()!!.string()
-                    val baseErrorResponse = Gson().fromJson(errorResponse, BaseErrorResponse::class.java)
+                    val baseErrorResponse =
+                        Gson().fromJson(errorResponse, BaseErrorResponse::class.java)
                     return if (baseErrorResponse != null) {
                         //Get error data from Server
                         baseErrorResponse.code = throwable.code()
@@ -145,7 +157,8 @@ class RetrofitException constructor(
         if (response == null || response.errorBody() == null || retrofit == null) {
             return null
         }
-        return retrofit.responseBodyConverter<T>(type, arrayOfNulls(0)).convert(response.errorBody()!!)
+        return retrofit.responseBodyConverter<T>(type, arrayOfNulls(0))
+            .convert(response.errorBody()!!)
     }
 
     companion object {
@@ -159,7 +172,14 @@ class RetrofitException constructor(
         }
 
         fun unexpectedError(exception: Throwable): RetrofitException {
-            return RetrofitException(exception.message, null, null, Kind.UNEXPECTED, exception, null)
+            return RetrofitException(
+                exception.message,
+                null,
+                null,
+                Kind.UNEXPECTED,
+                exception,
+                null
+            )
         }
     }
 }

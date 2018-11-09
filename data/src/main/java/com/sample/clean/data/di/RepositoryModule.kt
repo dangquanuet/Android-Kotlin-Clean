@@ -10,14 +10,15 @@ import com.sample.clean.data.local.pref.AppPrefs
 import com.sample.clean.data.local.pref.PrefHelper
 import com.sample.clean.domain.repository.UserRepository
 import org.koin.dsl.module.module
+import org.koin.experimental.builder.create
 
-val repositoryModule = module(override = true) {
+val repositoryModule = module {
     single { createDatabaseName() }
     single { createAppDatabase(get(), get()) }
     single { createUserDao(get()) }
-    single<PrefHelper> { AppPrefs(get(), get()) }
+    single<PrefHelper> { create<AppPrefs>() }
     single { Gson() }
-    single<UserRepository> { UserRepositoryImpl(get(), get(), get(), get()) }
+    single<UserRepository> { create<UserRepositoryImpl>() }
 }
 
 

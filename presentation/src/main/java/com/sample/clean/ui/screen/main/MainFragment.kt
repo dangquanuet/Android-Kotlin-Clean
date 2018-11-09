@@ -24,7 +24,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             tv_user.text = it.id
         })
 

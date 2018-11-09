@@ -31,10 +31,17 @@ android {
 
     productFlavors {
         develop {
+            buildConfigField "boolean", "MOCK_DATA", "false"
+            matchingFallbacks = ['debug', 'release']
+        }
+
+        mock {
+            buildConfigField "boolean", "MOCK_DATA", "true"
             matchingFallbacks = ['debug', 'release']
         }
 
         production {
+            buildConfigField "boolean", "MOCK_DATA", "false"
             matchingFallbacks = ['debug', 'release']
         }
     }

@@ -40,6 +40,10 @@ android {
 
         }
 
+        mock {
+
+        }
+
         production {
 
         }

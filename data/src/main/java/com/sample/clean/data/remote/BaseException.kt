@@ -12,7 +12,8 @@ class BaseException : RuntimeException {
 
     val serverErrorCode: Int
         get() = if (errorResponse != null
-                && errorResponse!!.code != null) errorResponse!!.code!! else -1
+            && errorResponse!!.code != null
+        ) errorResponse!!.code!! else -1
 
     constructor(type: Int, cause: Throwable) : super(cause.message, cause) {
         this.errorType = type
@@ -31,17 +32,19 @@ class BaseException : RuntimeException {
     override val message: String?
         get() = when (errorType) {
             SERVER -> if (errorResponse != null
-                    && errorResponse!!.errors != null
-                    && errorResponse!!.errors!!.isNotEmpty()
-                    && errorResponse!!.errors!!.get(0).name != null
-                    && errorResponse!!.errors!!.get(0).name!!.isNotEmpty()) {
+                && errorResponse!!.errors != null
+                && errorResponse!!.errors!!.isNotEmpty()
+                && errorResponse!!.errors!!.get(0).name != null
+                && errorResponse!!.errors!!.get(0).name!!.isNotEmpty()
+            ) {
                 errorResponse!!.errors!!.get(0).name!!.get(0)
             } else null
 
             NETWORK -> getNetworkErrorMessage(cause)
 
             HTTP -> if (response != null
-                    && response!!.message().isNotEmpty()) {
+                && response!!.message().isNotEmpty()
+            ) {
                 response!!.message()
             } else null
 

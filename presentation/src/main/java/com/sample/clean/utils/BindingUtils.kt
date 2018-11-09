@@ -54,19 +54,23 @@ fun ImageView.loadImage(imageName: String?) {
 }
 
 @BindingAdapter(
-        value = ["loadImage", "placeholder", "centerCrop", "fitCenter", "circleCrop", "cacheSource", "animation"],
-        requireAll = false)
-fun ImageView.loadImage(url: String? = "", placeHolder: Drawable?,
-                        centerCrop: Boolean = false, fitCenter: Boolean = false, circleCrop: Boolean = false,
-                        isCacheSource: Boolean = false, animation: Boolean = false) {
+    value = ["loadImage", "placeholder", "centerCrop", "fitCenter", "circleCrop", "cacheSource", "animation"],
+    requireAll = false
+)
+fun ImageView.loadImage(
+    url: String? = "", placeHolder: Drawable?,
+    centerCrop: Boolean = false, fitCenter: Boolean = false, circleCrop: Boolean = false,
+    isCacheSource: Boolean = false, animation: Boolean = false
+) {
     if (TextUtils.isEmpty(url)) {
         setImageDrawable(placeHolder)
         return
     }
     val requestBuilder = GlideApp.with(context).load(url)
     val requestOptions = RequestOptions().diskCacheStrategy(
-            if (isCacheSource) DiskCacheStrategy.DATA else DiskCacheStrategy.RESOURCE)
-            .placeholder(placeHolder)
+        if (isCacheSource) DiskCacheStrategy.DATA else DiskCacheStrategy.RESOURCE
+    )
+        .placeholder(placeHolder)
 
     if (!animation) requestOptions.dontAnimate()
     if (centerCrop) requestOptions.centerCrop()

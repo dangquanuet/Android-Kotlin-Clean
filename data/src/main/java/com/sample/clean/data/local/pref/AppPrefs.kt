@@ -7,7 +7,8 @@ class AppPrefs constructor(
     mContext: Context, val gson: Gson
 ) : PrefHelper {
 
-    private var sharedPreferences = mContext.getSharedPreferences(mContext.packageName, Context.MODE_PRIVATE)
+    private var sharedPreferences =
+        mContext.getSharedPreferences(mContext.packageName, Context.MODE_PRIVATE)
 
     companion object {
         private const val FIRST_RUN = "first_run"

@@ -25,9 +25,14 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     @get:LayoutRes
     abstract val layoutId: Int
 
-    var mAlertDialog: AlertDialog? = null
+    var loadingDialog: AlertDialog? = null
+    var messageDialog: AlertDialog? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         return viewBinding.root
     }
@@ -44,7 +49,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mAlertDialog = DialogUtils.createLoadingDialog(context, false)
+        loadingDialog = DialogUtils.createLoadingDialog(context, false)
         viewModel.apply {
             isLoading.observe(viewLifecycleOwner, Observer {
                 handleShowLoading(it == true)
@@ -63,7 +68,14 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun handleShowErrorMessage(message: String) {
-        DialogUtils.showMessage(context, message = message, textPositive = getString(R.string.ok))
+        messageDialog = DialogUtils.showMessage(
+            context, message = message, textPositive = getString(R.string.ok)
+        )
+    }
+
+    override fun onPause() {
+        messageDialog?.dismiss()
+        super.onPause()
     }
 
     override fun onDestroy() {
@@ -75,12 +87,12 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     fun showLoading() {
         hideLoading()
-        mAlertDialog?.show()
+        loadingDialog?.show()
     }
 
     fun hideLoading() {
-        if (mAlertDialog != null && mAlertDialog!!.isShowing) {
-            mAlertDialog?.cancel()
+        if (loadingDialog != null && loadingDialog!!.isShowing) {
+            loadingDialog?.cancel()
         }
     }
 
@@ -94,6 +106,16 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     fun findChildFragment(parentFragment: Fragment = this, TAG: String): Fragment? {
         return parentFragment.childFragmentManager.findFragmentByTag(TAG)
+    }
+
+    fun addFragment(
+        fragment: Fragment, TAG: String?, addToBackStack: Boolean = false,
+        transit: Int = -1
+    ) {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.container, fragment, TAG)?.apply {
+                commitTransaction(this, addToBackStack, transit)
+            }
     }
 
     fun replaceFragment(
